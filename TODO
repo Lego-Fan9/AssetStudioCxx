@@ -1,0 +1,2 @@
+- Uncomment AssetManagers.hpp line 17 (std::vector<SerializedFile> AssetsFileList = std::vector<SerializedFile>();)
+- Finish AssetManagers.cpp AssetManagers::LoadBundleFile

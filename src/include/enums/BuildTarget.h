@@ -1,0 +1,43 @@
+#ifndef BUILD_TARGET_H
+#define BUILD_TARGET_H
+
+enum BuildTarget_e {
+    BuildTarget_UnknownPlatform = 3716,
+    BuildTarget_DashboardWidget = 1,
+    BuildTarget_StandaloneOSX = 2,
+    BuildTarget_StandaloneOSXPPC = 3,
+    BuildTarget_StandaloneOSXIntel = 4,
+    BuildTarget_StandaloneWindows = 5,
+    BuildTarget_WebPlayer = 6,
+    BuildTarget_WebPlayerStreamed = 7,
+    BuildTarget_Wii = 8,
+    BuildTarget_iOS = 9,
+    BuildTarget_PS3 = 10,
+    BuildTarget_XBOX360 = 11,
+    BuildTarget_Android = 13,
+    BuildTarget_StandaloneGLESEmu = 14,
+    BuildTarget_NaCl = 16,
+    BuildTarget_StandaloneLinux = 17,
+    BuildTarget_FlashPlayer = 18,
+    BuildTarget_StandaloneWindows64 = 19,
+    BuildTarget_WebGL = 20,
+    BuildTarget_WSAPlayer = 21,
+    BuildTarget_StandaloneLinux64 = 24,
+    BuildTarget_StandaloneLinuxUniversal = 25,
+    BuildTarget_WP8Player = 26,
+    BuildTarget_StandaloneOSXIntel64 = 27,
+    BuildTarget_BlackBerry = 28,
+    BuildTarget_Tizen = 29,
+    BuildTarget_PSP2 = 30,
+    BuildTarget_PS4 = 31,
+    BuildTarget_PSM = 32,
+    BuildTarget_XboxOne = 33,
+    BuildTarget_SamsungTV = 34,
+    BuildTarget_N3DS = 35,
+    BuildTarget_WiiU = 36,
+    BuildTarget_tvOS = 37,
+    BuildTarget_Switch = 38,
+    BuildTarget_NoTarget = -2,
+};
+
+#endif
