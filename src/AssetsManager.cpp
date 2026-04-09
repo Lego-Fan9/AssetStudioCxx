@@ -1,10 +1,11 @@
 #include <cstdint>
+#include <filesystem>
 #include <stdexcept>
 #include <string>
-#include <filesystem>
 #include <vector>
 
 #include <fmt/core.h>
+#include <spdlog/spdlog.h>
 
 #include "enums/FileType.h"
 
@@ -49,12 +50,31 @@ bool AssetsManager::LoadAssetsFile(FileReader &reader, bool fromZip) {
 bool AssetsManager::LoadBundleFile(FileReader &reader) {
     bool isLoaded = false;
 
-    // try {
-    BundleFile bundleFile(reader);
+    try {
+        BundleFile bundleFile(reader);
+        spdlog::info("Read file");
+        isLoaded = LoadBundleFiles(reader, bundleFile);
+        spdlog::info("Loaded file");
+        /*if (!isLoaded) {
+            return false;
+        }
+
+        while (bundleFile.isDataAfterBundle && isLoaded) {
+            isLoaded = false;
+            spdlog::warn("bundleFile.isDataAfterBundle is not implemented");
+        }
+
+        return isLoaded;*/
 #ifdef SET_BUNDLE_TEST_FILE
-    bundleFileTest = bundleFile;
+        bundleFileTest = bundleFile;
 #endif
-    //}
+    } catch (const std::exception &e) {
+        spdlog::warn("Failed to load file: {}, Error: {}", reader.FullPath, e.what());
+        return true;
+    } catch (...) {
+        spdlog::warn("Failed to load file: {}", reader.FullPath);
+        return true;
+    }
 
     return isLoaded;
 }
@@ -67,7 +87,8 @@ bool AssetsManager::LoadBundleFiles(FileReader &reader, BundleFile &bundle) {
 
         file.stream.offset = 0;
         std::string dummyPath = (std::filesystem::path(reader.FullPath).parent_path() / file.fileName).string();
-        FileReader subReader = FileReader(dummyPath, std::vector<uint8_t>(file.stream.data(), file.stream.data() + file.stream.size()));
+        FileReader subReader =
+            FileReader(dummyPath, std::vector<uint8_t>(file.stream.data(), file.stream.data() + file.stream.size()));
         if (subReader.FileType == FileType_AssetsFile) {
             throw std::runtime_error("AssetsManager::LoadBundleFiles FileType.AssetsFile Not implemented");
         } else {
